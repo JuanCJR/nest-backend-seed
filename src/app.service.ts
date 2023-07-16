@@ -25,8 +25,7 @@ export class AppService {
     const [userData, itemCount] = await this.genericRepository.findAndCount({
       order: { id: order },
       skip: (page - 1) * take,
-      take: take,
-      relations: ['profile']
+      take: take
     });
 
     const pageMetaDto = new PageMetaDto({
@@ -42,8 +41,7 @@ export class AppService {
 
   async findOne({ id }: GetGenericDataDto): Promise<GenericEntity> {
     const genericData: GenericEntity = await this.genericRepository.findOne({
-      where: { id },
-      relations: ['profile']
+      where: { id }
     });
 
     !genericData && new BadRequestException('Generic data not found');

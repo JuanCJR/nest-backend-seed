@@ -52,7 +52,7 @@ export class AppController {
   }
 
   @Delete(':id')
-  async deleteProfile(@Param() params: GetGenericDataDto) {
+  async delete(@Param() params: GetGenericDataDto) {
     return this.appService.delete(params);
   }
 }

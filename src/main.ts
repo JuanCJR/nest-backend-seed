@@ -14,7 +14,7 @@ async function bootstrap() {
     logger: new LoggerWinston()
   });
 
-  app.setGlobalPrefix('api/alerti-configuration-adapter/v1');
+  app.setGlobalPrefix('api/generic-adapter/v1');
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -30,8 +30,8 @@ async function bootstrap() {
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
 
   const config = new DocumentBuilder()
-    .setTitle('Alert i Configuration Adapter ')
-    .setDescription('Adapter of alert i configuration')
+    .setTitle('Generic Adapter ')
+    .setDescription('Adapter of Generic backend repo')
     .setVersion('1.0')
     .build();
 
