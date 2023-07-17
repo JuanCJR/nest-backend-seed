@@ -11,14 +11,18 @@ import {
 import { AppService } from './app.service';
 import { ApiOkResponsePaginated } from './decorators/ApiOkResponsePaginated';
 import { GenericInterface } from './interfaces/generic.interfaces';
-import { ApiOkResponse } from '@nestjs/swagger';
+import { ApiOkResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
 import {
   CreateGenericDataDto,
   GetGenericDataDto,
-  GetPaginatedGenericDataDto,
+  GetGenericsDataDto,
   UpdateGenericDataDto
 } from './dtos/generic.dto';
+import { ErrorDefault } from '@common/interfaces/error.interface';
 
+@ApiResponse({ status: '4XX', type: ErrorDefault })
+@ApiResponse({ status: '5XX', type: ErrorDefault })
+@ApiTags('Generic')
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
@@ -26,7 +30,7 @@ export class AppController {
   @Get()
   @ApiOkResponsePaginated(GenericInterface)
   @Get()
-  async find(@Query() queryParams: GetPaginatedGenericDataDto) {
+  async find(@Query() queryParams: GetGenericsDataDto) {
     return await this.appService.find(queryParams);
   }
 

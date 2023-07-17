@@ -7,7 +7,7 @@ import { PageDto } from '@common/dtos/page.dto';
 import {
   CreateGenericDataDto,
   GetGenericDataDto,
-  GetPaginatedGenericDataDto,
+  GetGenericsDataDto,
   UpdateGenericDataDto
 } from './dtos/generic.dto';
 
@@ -18,11 +18,9 @@ export class AppService {
     private genericRepository: Repository<GenericEntity>
   ) {}
 
-  async find(
-    queryParams: GetPaginatedGenericDataDto
-  ): Promise<PageDto<GenericEntity>> {
+  async find(queryParams: GetGenericsDataDto): Promise<PageDto<GenericEntity>> {
     const { order, take, page } = queryParams;
-    const [userData, itemCount] = await this.genericRepository.findAndCount({
+    const [data, itemCount] = await this.genericRepository.findAndCount({
       order: { id: order },
       skip: (page - 1) * take,
       take: take
@@ -34,42 +32,41 @@ export class AppService {
     });
 
     return {
-      data: userData,
+      data: data,
       meta: pageMetaDto
     };
   }
 
   async findOne({ id }: GetGenericDataDto): Promise<GenericEntity> {
-    const genericData: GenericEntity = await this.genericRepository.findOne({
+    const data: GenericEntity = await this.genericRepository.findOne({
       where: { id }
     });
 
-    !genericData && new BadRequestException('Generic data not found');
+    !data && new BadRequestException('Generic data not found');
 
-    return genericData;
+    return data;
   }
 
   async create(payload: CreateGenericDataDto): Promise<GenericEntity> {
-    const newGenericData: GenericEntity =
-      this.genericRepository.create(payload);
+    const newData: GenericEntity = this.genericRepository.create(payload);
 
-    return await this.genericRepository.save(newGenericData);
+    return await this.genericRepository.save(newData);
   }
 
   async update(
     params: GetGenericDataDto,
     payload: UpdateGenericDataDto
   ): Promise<GenericEntity> {
-    const genericData: GenericEntity = await this.findOne(params);
+    const data: GenericEntity = await this.findOne(params);
 
-    const uptatedData = this.genericRepository.merge(genericData, payload);
+    const uptatedData = this.genericRepository.merge(data, payload);
 
     return await this.genericRepository.save(uptatedData);
   }
 
   async delete(params: GetGenericDataDto): Promise<DeleteResult> {
-    const genericData: GenericEntity = await this.findOne(params);
+    const data: GenericEntity = await this.findOne(params);
 
-    return await this.genericRepository.delete({ id: genericData.id });
+    return await this.genericRepository.delete({ id: data.id });
   }
 }
