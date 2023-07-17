@@ -1,0 +1,4 @@
+include:
+  - project: 'falabella-retail/txd/scanandgo/devops/pipelines'
+    ref: node-js
+    file: '.pipeline-backend.yml'

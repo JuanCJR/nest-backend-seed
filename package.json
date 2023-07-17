@@ -1,7 +1,7 @@
 {
-  "name": "nest-backend-seed",
+  "name": "stcx-dgsp-seed-nestjs",
   "version": "0.0.1",
-  "description": "",
+  "description": "Nest JS seed project",
   "author": "",
   "private": true,
   "license": "UNLICENSED",
@@ -27,12 +27,14 @@
   },
   "dependencies": {
     "@fastify/static": "^6.10.2",
+    "@google-cloud/secret-manager": "^4.2.2",
     "@nestjs/axios": "^3.0.0",
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^3.0.0",
     "@nestjs/core": "^10.0.0",
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/platform-fastify": "^10.0.5",
+    "@nestjs/serve-static": "^4.0.0",
     "@nestjs/swagger": "^7.1.1",
     "@nestjs/typeorm": "^10.0.0",
     "axios": "^1.4.0",
@@ -87,5 +89,9 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "jestSonar": {
+    "reportPath": "coverage",
+    "reportFile": "test-reporter.xml"
   }
 }

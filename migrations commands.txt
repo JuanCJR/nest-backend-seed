@@ -1,1 +1,0 @@
-npm run migrations-win:generate --migration_name=users

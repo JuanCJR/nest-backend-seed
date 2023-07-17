@@ -8,8 +8,15 @@ import {
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import * as fs from 'fs';
 import { LoggerWinston } from '@common/utils/logger';
+import { setEnvironmentVariablesGCP } from './config';
+import { sh } from '@common/utils/ah.util';
 
 async function bootstrap() {
+  if (process.env.NODE_ENV !== 'local') {
+    await setEnvironmentVariablesGCP();
+    await sh('npm run migrations:run');
+  }
+
   const app = await NestFactory.create(AppModule, {
     logger: new LoggerWinston()
   });

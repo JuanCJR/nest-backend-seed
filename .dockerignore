@@ -1,0 +1,10 @@
+node_modules
+dist
+kubectl-files
+deployment
+product
+.idea
+.nyc_output
+.vscode
+.env
+charts

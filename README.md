@@ -46,6 +46,8 @@ $ npm run migrations:run
 $ npm run migrations:revert
 ```
 
+## Env variables
+
 ```bash
 # Env Variables
 DB_NAME=dbname
@@ -55,3 +57,13 @@ DB_PORT=5432
 DB_HOST=localhost
 APP_PORT=8000
 ```
+
+## Considerations
+
+1. Change the project name and the description in the package.json file
+1. Change the following properties in the ./sonar-project.properties file
+   - sonar.projectKey
+   - sonar.projectName
+1. The env variables are defined in the ./config.ts file. Remember add the new variables in enviromentVariables constant to take env variables of secret manager
+1. If this project doesn't use conection to the database, remove all typeorm references
+1. Change the global prefix of this project in the main.ts file on the line app.setGlobalPrefix('api/generic-adapter/v1');
